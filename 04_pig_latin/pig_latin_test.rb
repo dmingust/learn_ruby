@@ -1,3 +1,4 @@
+=begin
 def translate(s)
 	s_array = s.split('')
 	vowels = ['a','e','i','o','u']
@@ -77,3 +78,24 @@ def translate_many_words(s)
 	end
 end
 translate_many_words("the quick brown fox")
+=end
+
+def translate(string)
+	words = string.split(' ')
+	words.map! do |word|
+		if word.include?('q')
+			puts word.index('q')
+			x = word.split('')
+			x = x.rotate(word.index('q') + 2)
+			x = x.join('') + 'ay'
+			puts x.to_s
+		else
+			print "no"			
+		end
+	end
+
+end	
+translate("square")
+
+
+

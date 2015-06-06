@@ -1,21 +1,30 @@
-# copied from https://github.com/ultrasaurus/test-first-teaching/blob/master/learn_ruby/pig_latin/solution/pig_latin.rb
+def translate(string)
+  vowels = ['a','e','i','o','u']
+  cons = ('a'..'z').to_a - vowels
+  words = string.split(' ')
+  words.map! do |word|
+    if vowels.include?(word[0])
+      x = word + 'ay'
 
-def translate phrase
-  phrase.split.map do |word|
+    elsif word.include?('q')
+      x = word.split('')
+      x = x.rotate(word.index('q') + 2)
+      x = x.join('') + 'ay'
 
-    # we are using "/x" to document this big fat regex
-    word =~ /^     # beginning of string
-    (
-      [^aeiouyq]*  # any number of consonants in a row
-      (qu)?        # or maybe a 'qu'
-    )
-    (.*)           # the rest of the string
-    $/x            # end of string
+    elsif cons.include?(word[0] && word[1])
+      x = word.split('')
+      if cons.include?(word[0] && word[1] && word[2])
+        x_rot = x.rotate(3)
+      else
+        x_rot = x.rotate(2)
+      end      
+      x_rot = x_rot.join('') + 'ay'
 
-    # $1, $2, etc. get filled with the parenthesized chunks
-    # from the most recent regular expression match
-    first_phoneme = $1
-    rest_of_word = $3
-    "#{rest_of_word}#{first_phoneme}ay"
-  end.join(" ")
+    elsif cons.include?(word[0])
+      x = word.split('')
+      x = x.rotate
+      x = x.join('') + 'ay'
+    end    
+  end
+  words.join(' ')
 end
