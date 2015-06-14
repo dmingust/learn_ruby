@@ -28,9 +28,6 @@ def titleize(title)
 		else
 			word.capitalize
 		end
-
 	end
-
-
 	words.join(' ')
 end
